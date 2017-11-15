@@ -49,7 +49,7 @@
     methods: {
       onSuccess: function (res, file, filelist) {
         if (res.statusCode === 200) {
-          vm.fileLink = `${vm.oss.host}/${res.result.filename}`
+          vm.fileLink = vm.oss.host + res.result.filename
 
         }
       },
