@@ -1,0 +1,18 @@
+{
+  "name": "oss-fe-upload",
+  "version": "1.0.0",
+  "description": "oss fe upload",
+  "main": "index.js",
+  "scripts": {
+    "test": "node app.js"
+  },
+  "keywords": [
+    "oss"
+  ],
+  "author": "unliar",
+  "license": "MIT",
+  "devDependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2"
+  }
+}

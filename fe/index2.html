@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    input {
+      display: block;
+      margin: 5px;
+      padding: 15px;
+      width: 50%;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>oss上传</h1>
+  <input type="file" id="file">
+
+  <input type="text" id="link" placeholder="回调结果">
+</body>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+  window.onload = function () {
+    let upload = document.getElementById("upload")
+    let link = document.getElementById("link")
+    let obj = {}
+    axios.get("/api/ossSign").then(res => {
+      if (res.data.statusCode === 200) {
+        let {
+          dirPath,
+          key,
+          host,
+          policy,
+          Signature,
+          callback,
+          OSSAccessKeyId
+        } = res.data.result
+        obj.host = host
+        obj.key = dirPath + key + "${filename}"
+        obj.policy = policy
+        obj.Signature = Signature
+        obj.callback = callback
+        obj.OSSAccessKeyId = OSSAccessKeyId
+        console.log(obj)
+      } else {
+        alert(res.data.message)
+      }
+
+    })
+    document.querySelector("#file").onchange = function (e) {
+      let data = e.target.files[0]
+      console.log(data)
+      let formData = new FormData()
+
+      for (let key in obj) {
+        formData.append(key, obj[key])
+      }
+      //append 文件必须放在最后，不然会报key错误
+      formData.append("file", data)
+
+      axios.post(obj.host, formData).then(res => {
+        document.querySelector("#link").value = obj.host + res.data.result.filename
+      })
+
+    }
+
+  }
+</script>
+
+</html>
