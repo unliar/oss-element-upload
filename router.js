@@ -7,9 +7,9 @@ const config = {
   region: 'oss-cn-hangzhou', //oss节点名
   accessKeyId: '不给看', //申请的osskey
   accessKeySecret: '不给看', //申请的osssecret
-  callbackIp: "116.62.102.2", //回调ip,一定要能被外网访问的地址,你可以暂时用这个...后台的代码和下面路由一致,不过不建议
+  callbackIp: "116.62.102.22", //回调ip,一定要能被外网访问的地址。不要用这个地址,我瞎写的，用自己部署服务器地址就ok了。
   callbackPort: "2225", //回调端口
-  callbackPath: "acapi/be/ossCallback", //回调接口
+  callbackPath: "api/ossCallback", //回调接口路径
   expAfter: 60000, //签名失效时间
   maxSize: 1048576000 //最大文件大小
 }
